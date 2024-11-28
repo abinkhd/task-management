@@ -30,6 +30,7 @@ Start the application:
 Open your browser and go to `http://localhost:3000` to start using the Task Manager.
 
 Usage:-
+Use user credential like username:john_doe, password:john1234 or username:mike_joe password: mike9012
 Log in to the application using your username.
 Create new tasks by clicking the "Add Task" button.
 View your tasks in a card format.
