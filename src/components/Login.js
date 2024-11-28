@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@mui/material";
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const paperStyle = {
   width: "100%",
   maxWidth: "400px",
@@ -19,6 +19,7 @@ const paperStyle = {
 };
 const Login = () => {
   const [login, setLogin] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
   const handleChange = (e) => {
     setLogin({ ...login, [e.currentTarget.id]: e.currentTarget.value });
   };
@@ -31,10 +32,12 @@ const Login = () => {
       (user) =>
         user.username === login.username && user.password === login.password
     );
-    console.log(user);
-
-    user && localStorage.setItem("auth", JSON.stringify(user.username));
-    navigate("/home");
+    if (!user) {
+      setError("Invalid User");
+    } else {
+      localStorage.setItem("auth", JSON.stringify(user.username));
+      navigate("/home");
+    }
   };
   return (
     <Box>
@@ -64,6 +67,7 @@ const Login = () => {
             >
               Login
             </Button>
+            {error ? <p style={{ color: "red" }}>{error}</p> : ""}
           </Stack>
         </form>
       </Paper>

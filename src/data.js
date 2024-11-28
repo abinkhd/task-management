@@ -36,7 +36,7 @@ export const tasks = [
     taskId: 1,
     taskDescription: "Complete ReactJS tutorial",
     assignedTo: "john_doe",
-    status: "In Progress",
+    status: "InProgress",
     dueDate: "2024-12-05",
   },
   {
@@ -57,7 +57,7 @@ export const tasks = [
     taskId: 4,
     taskDescription: "Prepare a presentation on modern web development tools",
     assignedTo: "lucy_williams",
-    status: "In Progress",
+    status: "InProgress",
     dueDate: "2024-12-01",
   },
   {
@@ -78,7 +78,7 @@ export const tasks = [
     taskId: 7,
     taskDescription: "Test the latest version of the app",
     assignedTo: "mike_joe",
-    status: "In Progress",
+    status: "InProgress",
     dueDate: "2024-12-07",
   },
 ];

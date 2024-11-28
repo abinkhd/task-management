@@ -1,24 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import MyCard from "./common/Card";
+import { TasksContext } from "../statemanagement/context/TasksContext";
+
+import { Box } from "@mui/material";
+import AddTask from "./common/AddTask";
+import MyPopup from "./common/Popup";
+import { UserContext } from "../statemanagement/context/UserContext";
+import Popup from "reactjs-popup";
 
 const UserTasks = () => {
-  const [user, setUser] = useState();
-  const [usertasks, setUsertasks] = useState([]);
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("auth")));
-    setUsertasks(
-      JSON.parse(localStorage.getItem("tasks")).filter(
-        (task) => task.assignedTo === user
-      )
-    );
-  }, []);
+  const { usertasks, setUsertasks, alltasks, setAlltasks } =
+    useContext(TasksContext);
+  const user = useContext(UserContext);
+
+  // Effect to fetch and set the user data from localStorage
+
+  // Dependency on user state ensures this effect runs when the user is set
+
   return (
-    <div>
-      <ul>
-        {usertasks.map((task) => (
-          <li key={task.id}>{task.taskDescription}</li>
-        ))}
-      </ul>
-    </div>
+    <Box>
+      {/* Check if there are any tasks for the user */}
+
+      <Popup trigger={<AddTask />} position="right center" modal nested>
+        <MyPopup
+          user={user}
+          alltasks={alltasks}
+          usertasks={usertasks}
+          setAlltasks={setAlltasks}
+          setUsertasks={setUsertasks}
+        />
+      </Popup>
+      {usertasks.length > 0 ? (
+        usertasks.map((task, index) => (
+          <MyCard key={task.taskId} task={task} index={index + 1} />
+        ))
+      ) : (
+        <p>No tasks available for this user.</p>
+      )}
+    </Box>
   );
 };
 
