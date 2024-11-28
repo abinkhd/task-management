@@ -20,14 +20,14 @@ Installation Instructions
 To get started with the Task Manager app, follow these steps:
 
 Clone the repository to your local machine:
-git clone https://github.com/abinkhd/task-management.git
+`git clone https://github.com/abinkhd/task-management.git`
 Navigate into the project directory:
-cd task-manager
+`cd task-manager`
 Install all the dependencies:
-npm install
+`npm install`
 Start the application:
-npm start
-Open your browser and go to http://localhost:3000 to start using the Task Manager.
+`npm start`
+Open your browser and go to `http://localhost:3000` to start using the Task Manager.
 
 Usage
 Log in to the application using your username.
@@ -40,5 +40,5 @@ Tasks will be stored in localStorage and will persist even if the page is reload
 Contact Information
 For any questions or feedback, feel free to reach out via:
 
-Email: abinkhd@gmail.com
-GitHub: https://github.com/abinkhd
+Email: `abinkhd@gmail.com`
+GitHub: `https://github.com/abinkhd`
