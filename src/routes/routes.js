@@ -4,6 +4,8 @@ import UserTasks from "../components/UserTasks";
 import PrivateRoutes from "./PrivateRoute";
 import PublicRoutes from "./PublicRoute";
 import Navbar from "../components/Navbar";
+import UserProvider from "../statemanagement/context/UserProvider";
+import TaskProvider from "../statemanagement/context/TaskProvider";
 const routes = createBrowserRouter([
   {
     element: <PublicRoutes />,
@@ -25,10 +27,12 @@ const routes = createBrowserRouter([
       {
         path: "/home",
         element: (
-          <>
-            <Navbar />
-            <UserTasks />
-          </>
+          <UserProvider>
+            <TaskProvider>
+              <Navbar />
+              <UserTasks />
+            </TaskProvider>
+          </UserProvider>
         ),
       },
     ],

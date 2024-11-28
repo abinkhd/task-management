@@ -1,42 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import MyCard from "./common/Card";
+import { TasksContext } from "../statemanagement/context/TasksContext";
+
+import { Box } from "@mui/material";
+import AddTask from "./common/AddTask";
+import MyPopup from "./common/Popup";
+import { UserContext } from "../statemanagement/context/UserContext";
+import Popup from "reactjs-popup";
 
 const UserTasks = () => {
-  // State to store the logged-in user object
-  const [user, setUser] = useState();
-
-  // State to store the filtered tasks assigned to the logged-in user
-  const [usertasks, setUsertasks] = useState([]);
+  const { usertasks, setUsertasks, alltasks, setAlltasks } =
+    useContext(TasksContext);
+  const user = useContext(UserContext);
 
   // Effect to fetch and set the user data from localStorage
-  useEffect(() => {
-    // Get the user data stored in localStorage (key: 'auth') and parse it
-    setUser(JSON.parse(localStorage.getItem("auth")));
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
 
-  // Effect to fetch tasks and filter them based on the logged-in user
-  useEffect(() => {
-    if (user) {
-      // Get tasks data from localStorage (key: 'tasks')
-      const tasksFromStorage = localStorage.getItem("tasks");
-
-      if (tasksFromStorage) {
-        // Parse the tasks from localStorage
-        const tasks = JSON.parse(tasksFromStorage);
-
-        // Filter tasks that are assigned to the logged-in user
-        const filteredTasks = tasks.filter((task) => task.assignedTo === user);
-        console.log(filteredTasks);
-
-        // Update the usertasks state with the filtered tasks
-        setUsertasks(filteredTasks);
-      }
-    }
-  }, [user]); // Dependency on user state ensures this effect runs when the user is set
+  // Dependency on user state ensures this effect runs when the user is set
 
   return (
-    <div>
+    <Box>
       {/* Check if there are any tasks for the user */}
+
+      <Popup trigger={<AddTask />} position="right center" modal nested>
+        <MyPopup
+          user={user}
+          alltasks={alltasks}
+          usertasks={usertasks}
+          setAlltasks={setAlltasks}
+          setUsertasks={setUsertasks}
+        />
+      </Popup>
       {usertasks.length > 0 ? (
         usertasks.map((task, index) => (
           <MyCard key={task.taskId} task={task} index={index + 1} />
@@ -44,7 +37,7 @@ const UserTasks = () => {
       ) : (
         <p>No tasks available for this user.</p>
       )}
-    </div>
+    </Box>
   );
 };
 

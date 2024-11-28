@@ -12,7 +12,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   React.useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("auth")));
-  });
+  }, []);
 
   const handleClick = () => {
     localStorage.removeItem("auth");
