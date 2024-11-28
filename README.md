@@ -1,4 +1,4 @@
-Task Manager
+`Task Manager`
 
 Project Description
 Task Manager is a simple task management application built with React. It allows users to log in, manage their tasks, and store their tasks persistently in the browser’s localStorage. Each user has their own task list, and tasks are stored specific to the logged-in user. The application supports full CRUD (Create, Read, Update, Delete) functionality for managing tasks.
