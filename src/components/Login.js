@@ -8,15 +8,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const paperStyle = {
-  width: "100%",
-  maxWidth: "400px",
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  padding: "20px",
-  margin: "7% auto",
-};
+
 const Login = () => {
   const [login, setLogin] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
@@ -40,8 +32,8 @@ const Login = () => {
     }
   };
   return (
-    <Box>
-      <Paper style={paperStyle}>
+    <Stack className="container">
+      <Paper className="paperStyle">
         <form onSubmit={handleSubmit}>
           <Stack alignItems={"center"} spacing={4}>
             <Typography variant="h4" fontFamily={"system-ui"}>
@@ -71,7 +63,7 @@ const Login = () => {
           </Stack>
         </form>
       </Paper>
-    </Box>
+    </Stack>
   );
 };
 

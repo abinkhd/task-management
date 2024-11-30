@@ -17,8 +17,6 @@ import {
 import { TasksContext } from "../../statemanagement/context/TasksContext";
 import Popup from "reactjs-popup";
 
-const myCardStyle = { margin: "2% auto", width: "50%" };
-
 export default function MyCard({ task, index }) {
   const { usertasks, setUsertasks } = React.useContext(TasksContext);
   const [taskUpdate, setTaskUpdate] = React.useState({
@@ -74,86 +72,81 @@ export default function MyCard({ task, index }) {
   };
 
   return (
-    <Box>
-      <Card style={myCardStyle}>
-        <CardContent>
-          <Typography
-            gutterBottom
-            sx={{ color: "text.secondary", fontSize: 14 }}
+    <Card className="cardStyle">
+      <CardContent>
+        <Typography gutterBottom sx={{ color: "text.secondary", fontSize: 14 }}>
+          Task {index}
+        </Typography>
+        <Typography variant="h5" component="div">
+          #{task.taskId} {task.taskDescription}
+        </Typography>
+        <span
+          className="taskStatusStyle"
+          style={{
+            backgroundColor: `${
+              (task.status === "InProgress" && "orange") ||
+              (task.status === "Completed" && "green") ||
+              (task.status === "Pending" && "#00ffe5")
+            }`,
+          }}
+        >
+          {task.status}
+        </span>
+        <Typography variant="h6" sx={{ paddingTop: "5px" }}>
+          Due Date:{task.dueDate}
+        </Typography>
+      </CardContent>
+      <Stack flexDirection={"row"}>
+        <CardActions>
+          <Button size="small" onClick={() => handleStatus(task.taskId)}>
+            {task.status === "Completed" ? "Reopen" : "Mark As Completed"}
+          </Button>
+        </CardActions>
+        <CardActions>
+          <Button size="small" onClick={() => handleDelete(task.taskId)}>
+            Delete
+          </Button>
+        </CardActions>
+        <CardActions>
+          <Popup
+            trigger={<Button size="small">Edit</Button>}
+            position="right center"
+            modal
+            nested
           >
-            Task {index}
-          </Typography>
-          <Typography variant="h5" component="div">
-            #{task.taskId} {task.taskDescription}
-          </Typography>
-          <span
-            className="taskStatusStyle"
-            style={{
-              backgroundColor: `${
-                (task.status === "InProgress" && "orange") ||
-                (task.status === "Completed" && "green") ||
-                (task.status === "Pending" && "#00ffe5")
-              }`,
-            }}
-          >
-            {task.status}
-          </span>
-          <Typography variant="h6" sx={{ paddingTop: "5px" }}>
-            DueDate:{task.dueDate}
-          </Typography>
-        </CardContent>
-        <Stack flexDirection={"row"}>
-          <CardActions>
-            <Button size="small" onClick={() => handleStatus(task.taskId)}>
-              {task.status === "Completed" ? "Reopen" : "Mark As Completed"}
-            </Button>
-          </CardActions>
-          <CardActions>
-            <Button size="small" onClick={() => handleDelete(task.taskId)}>
-              Delete
-            </Button>
-          </CardActions>
-          <CardActions>
-            <Popup
-              trigger={<Button size="small">Edit</Button>}
-              position="right center"
-              modal
-              nested
-            >
-              <Paper className="paperStyle">
-                <form onSubmit={handleSubmit}>
-                  <Stack alignItems={"center"} spacing={4}>
-                    <Typography variant="h5">Edit Tasks</Typography>
-                    <TextField
-                      id="taskDescription"
-                      label="Description"
-                      value={taskUpdate.taskDescription}
-                      onChange={handleChange}
-                    ></TextField>
-                    <FormControl fullWidth>
-                      <InputLabel id="status">Status</InputLabel>
-                      <Select
-                        labelId="status"
-                        id="status"
-                        value={taskUpdate.status}
-                        label="Status"
-                        onChange={handleSelect}
-                      >
-                        <MenuItem value="Pending">Pending</MenuItem>
-                        <MenuItem value="InProgress">InProgress</MenuItem>
-                        <MenuItem value="Completed">Completed</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <Button variant="contained" type="submit">
-                      Update
-                    </Button>
-                  </Stack>
-                </form>
-              </Paper>
-            </Popup>
-          </CardActions>
-        </Stack>
-      </Card>
-    </Box>
+            <Paper className="paperStyle">
+              <form onSubmit={handleSubmit}>
+                <Stack alignItems={"center"} spacing={4}>
+                  <Typography variant="h5">Edit Tasks</Typography>
+                  <TextField
+                    id="taskDescription"
+                    label="Description"
+                    value={taskUpdate.taskDescription}
+                    onChange={handleChange}
+                  ></TextField>
+                  <FormControl fullWidth>
+                    <InputLabel id="status">Status</InputLabel>
+                    <Select
+                      labelId="status"
+                      id="status"
+                      value={taskUpdate.status}
+                      label="Status"
+                      onChange={handleSelect}
+                    >
+                      <MenuItem value="Pending">Pending</MenuItem>
+                      <MenuItem value="InProgress">InProgress</MenuItem>
+                      <MenuItem value="Completed">Completed</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <Button variant="contained" type="submit">
+                    Update
+                  </Button>
+                </Stack>
+              </form>
+            </Paper>
+          </Popup>
+        </CardActions>
+      </Stack>
+    </Card>
   );
 }
