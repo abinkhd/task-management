@@ -21,7 +21,7 @@ export default function Navbar() {
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky">
+      <AppBar sx={{ width: "100%" }} position="static">
         <Toolbar>
           <TaskIcon sx={{ paddingTop: "-6px" }} />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 const buttonStyle = {
   margin: "2% auto",
-  width: "50%",
+  width: "100%",
 };
 const AddTask = ({ onClick }) => {
   const handleClick = () => {

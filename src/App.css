@@ -1,16 +1,33 @@
+
+
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+
+.paperStyle{
+  margin-top: 4%;
+  width: 100%;
+  max-width: 400px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.cardStyle{
+  justify-content: center;
+  max-width: 400px;
+  min-width: 40%;
+  padding: 20px;
+  width: 100%;
+  margin-top: 2%;
+}
+
 .taskStatusStyle{
   border-radius: 5px;
   padding: 5px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: 600;
-}
-
-.paperStyle{
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 20px;
-  margin: 7% auto;
 }

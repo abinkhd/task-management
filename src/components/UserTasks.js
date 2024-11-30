@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import MyCard from "./common/Card";
 import { TasksContext } from "../statemanagement/context/TasksContext";
 
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import AddTask from "./common/AddTask";
 import MyPopup from "./common/Popup";
 import { UserContext } from "../statemanagement/context/UserContext";
 import Popup from "reactjs-popup";
+
+const myCardStyle = { margin: "2% auto", width: "50%" };
 
 const UserTasks = () => {
   const { usertasks, setUsertasks, alltasks, setAlltasks } =
@@ -18,7 +20,7 @@ const UserTasks = () => {
   // Dependency on user state ensures this effect runs when the user is set
 
   return (
-    <Box>
+    <Stack className="container">
       {/* Check if there are any tasks for the user */}
 
       <Popup trigger={<AddTask />} position="right center" modal nested>
@@ -35,9 +37,11 @@ const UserTasks = () => {
           <MyCard key={task.taskId} task={task} index={index + 1} />
         ))
       ) : (
-        <p>No tasks available for this user.</p>
+        <p style={{ margin: "15% 40%", width: "30%" }}>
+          No tasks available for this user.
+        </p>
       )}
-    </Box>
+    </Stack>
   );
 };
 
